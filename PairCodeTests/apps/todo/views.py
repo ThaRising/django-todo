@@ -22,6 +22,7 @@ class TodoForm(forms.ModelForm):
 class TodoViewset(mixins.RetrieveModelMixin,
                   mixins.ListModelMixin,
                   mixins.CreateModelMixin,
+                  mixins.UpdateModelMixin,
                   viewsets.GenericViewSet):
     serializer_class = serializers.TodoSerializer
     queryset = todo_models.Model.objects.all()

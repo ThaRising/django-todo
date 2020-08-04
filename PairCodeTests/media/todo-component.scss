@@ -1,0 +1,8 @@
+div.todo-component {
+    display: flex;
+    flex-direction: row;
+
+    &[complete="true"] {
+        background: red;
+    }
+}

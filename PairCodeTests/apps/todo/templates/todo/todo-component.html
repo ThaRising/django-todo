@@ -1,0 +1,53 @@
+{% load static %}
+<link rel="stylesheet" href="{% static "todo-component.css" %}">
+
+<div class="todo-component flex-col items-center space-x-4 bg-gray-400 rounded"
+     x-bind:complete="isComplete"
+     x-bind:id="id"
+     x-ref="todo"
+     x-data="{ isComplete: {{ done|lower }}, id: {{ id }} }"
+     x-init="$watch('isComplete', v => watchCallback(v, $refs.todo.id))"
+>
+    <input class="form-checkbox h-5 w-5 text-gray-600"
+           type="checkbox"
+           x-model="isComplete"
+    >
+    <div class="todo-component-inner flex-row">
+        <p>{{ title }}</p>
+        <p>{{ desc|default:"<i>Empty</i>" }}</p>
+        <p>Created on {{ createdAt }}</p>
+    </div>
+</div>
+
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function watchCallback(v, id) {
+        $.ajax({
+                    headers: {
+                        "X-CSRFToken": getCookie('csrftoken')
+                    },
+                    type: "PATCH",
+                    url: "/todo-app/todo/" + id.toString() + "/",
+                    data: JSON.stringify({
+                        "complete": v
+                    }),
+                    processData: false,
+                    contentType: 'application/json',
+                }
+        )
+    }
+</script>

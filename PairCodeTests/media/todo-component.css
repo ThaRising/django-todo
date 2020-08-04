@@ -1,0 +1,9 @@
+div.todo-component {
+  display: flex;
+  flex-direction: row;
+}
+div.todo-component[complete=true] {
+  background: red;
+}
+
+/*# sourceMappingURL=todo-component.css.map */
