@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% debug %}
+
+{% block content %}
+    <div x-data="{
+    data: {% if value.path %}{{ value.path }}{% else %}''{% endif %},
+    url: {% if value.url %}{{ value.url }}{% else %}''{% endif %},
+    }" class="generic-component" id="{{ attrs.id }}">
+        <input type="file" name="{{ widget.name }}"
+               accept="image/*" x-model="data"
+               @change="url = URL.createObjectURL($event.target.files[0])">
+        <img :src="url" alt="{{ value.name|default:'' }}"
+             x-show="url"
+             onload="window.URL.revokeObjectURL(src)">
+        <button x-show="url"
+                @click="url = ''; data = ''"
+        >{% trans "Remove Image" %}</button>
+    </div>
+{% endblock content %}

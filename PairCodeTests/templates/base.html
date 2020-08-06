@@ -8,8 +8,6 @@
     <title>{% block title %}{{ title|default:"Document" }}{% endblock title %}</title>
     {% load static %}
     <link rel='stylesheet' href={% static 'bootstrap4/css/Bootstrap.css' %}>
-    <script src='{% static 'jquery/jquery.min.js' %}'></script>
-    <script src='{% static 'bootstrap4/js/Bootstrap.js' %}'></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     {% block extrahead %}{% endblock extrahead %}

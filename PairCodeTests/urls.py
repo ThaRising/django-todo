@@ -13,7 +13,8 @@ urlpatterns = [
         schema_view.with_ui('redoc', cache_timeout=0),
         name='schema-redoc'),
     url(r'^api-auth/', include('rest_framework.urls')),
-    path("todo-app/", include("PairCodeTests.apps.todo.urls"))
+    path("todo-app/", include("PairCodeTests.apps.todo.urls")),
+    path("generic/", include("PairCodeTests.apps.alpine-tests.urls"))
 ]
 
 if settings.DEBUG:

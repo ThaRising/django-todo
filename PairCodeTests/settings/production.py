@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     'PairCodeTests.apps.todo',
+    'PairCodeTests.apps.alpine-tests'
 ]
 
 DATABASES = {
